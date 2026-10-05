@@ -5,7 +5,7 @@
 #
 # Tests the core functionality of nes.nu
 
-use std assert
+use std/assert
 
 # ============================================================================
 # Validation Tests (inline implementation for standalone testing)
@@ -35,7 +35,7 @@ def test-is-natural-language [input: string]: nothing -> bool {
     }
 
     let first = $words | first
-    let first_lower = $first | str downcase
+    let first_lower = $first | str lowercase
     let is_known_command = (which $first | length) > 0
 
     if ($trimmed =~ ' -[a-zA-Z]') { return false }
@@ -47,7 +47,7 @@ def test-is-natural-language [input: string]: nothing -> bool {
 
     let remaining_words = $words | skip 1
     let indicator_count = $remaining_words | where {|w|
-        ($w | str downcase) in $NATURAL_LANGUAGE_INDICATORS
+        ($w | str lowercase) in $NATURAL_LANGUAGE_INDICATORS
     } | length
 
     $indicator_count >= 2
